@@ -6,7 +6,7 @@ from security import authenticate,identity
 from resources.user import UserRegister
 from resources.item import Item,ItemList
 from resources.store import Store,StoreList
-from db import db
+
 
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'#saying that sqlalchemy is running in the root of our project
@@ -15,9 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False#this tracker track the object
 app.secret_key='christy'
 api=Api(app)
 
-@app.before_first_request
-def create_table():
-    db.create_all()#we have deleted the create_table file, bcz sqlalchemy will create the table using the decorator
+
 
 jwt=JWT(app,authenticate,identity)
 
