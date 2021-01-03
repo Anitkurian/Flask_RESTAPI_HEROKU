@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -9,7 +10,7 @@ from resources.store import Store,StoreList
 
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'#saying that sqlalchemy is running in the root of our project
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL','sqlite:///data.db')#saying that sqlalchemy is running in the root of our project
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False#this tracker track the object that had change the database, we are turning it off, since the bse
 #library sqlalchemy have more advanced tracker
 app.secret_key='christy'
